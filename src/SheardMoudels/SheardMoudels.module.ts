@@ -5,10 +5,12 @@ import { SidebarComponent } from './Componts/Sidebar/Sidebar.component';
 import { HeaderComponent } from './Componts/Header/Header.component';
 import { HomeComponent } from './Componts/Home/Home.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
-    CommonModule,FormsModule
+    CommonModule,FormsModule,RouterModule,HttpClientModule
   ],
   declarations: [SheardMoudelsComponent,SidebarComponent,HeaderComponent,HomeComponent],
   exports:[SidebarComponent,HeaderComponent,HomeComponent]

@@ -9,17 +9,28 @@ import { AuthModule } from 'src/Auth/Auth.module';
 import { CategoryModule } from 'src/Category/Category.module';
 import { ProductModule } from 'src/Product/Product.module';
 import { OrderModule } from 'src/Order/Order.module';
+import { LayoutComponent } from './Layout/Layout.component';
+import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './interceptors/token-interceptor.service';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [	
+    AppComponent,
+      LayoutComponent
+   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    AppRoutingModule,FormsModule,
     SheardMoudelsModule,RouterModule,AuthModule,CategoryModule,ProductModule,OrderModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
