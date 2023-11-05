@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ResponseVM } from 'src/ModelVM/ResponseVM';
 import { environment } from 'src/environments/environment';
 
@@ -10,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MainCategoryComponent implements OnInit {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private router:Router) { }
 
   respnseobj:ResponseVM=new ResponseVM();
   ngOnInit() {
@@ -25,5 +26,27 @@ export class MainCategoryComponent implements OnInit {
     error=>{
       alert("errror");
     })
+  }
+  DeleteCategory(Id:any){
+    var condel=confirm("Are you sure delete");
+    if(condel===false){
+
+    }
+    else{
+    this.http.delete<any>(`${environment.apiUrl}api/Category/DeleteCategory?CategoryID=${Id}`).subscribe(
+      res=>{
+        location.reload();
+      },
+      error=>{
+        alert("error");
+      }
+      
+    )
+    }
+  }
+  EditCategory(Category:any){
+    localStorage.setItem("Category",JSON.stringify(Category));
+    this.router.navigate(['/EditCategory']);
+
   }
 }

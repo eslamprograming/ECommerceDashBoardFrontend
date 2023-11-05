@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ResponseVM } from 'src/ModelVM/ResponseVM';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-CreateProduct',
@@ -14,15 +15,16 @@ export class CreateProductComponent implements OnInit {
 
   responseobj:ResponseVM=new ResponseVM();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private router:Router) { }
 
   fileToUpload: File | null = null;
   onFileSelected(event: any) {
     this.fileToUpload = event.target.files[0];
+    alert(this.fileToUpload);
   }
 
   onSubmit(formData: any) {
-    alert("submit");
+    const objToSend = new FormData();
     alert(formData.ProductName);
     alert(formData.ProductImageURL);
     alert(formData.Price);
@@ -30,10 +32,10 @@ export class CreateProductComponent implements OnInit {
     alert(formData.Description);
     alert(formData.CategoryID);
 
-    const objToSend = new FormData();
+
     objToSend.append('ProductName', formData.ProductName);
-    if (this.fileToUpload != null) {
-      objToSend.append('ProductImageURL', this.fileToUpload, this.fileToUpload.name);
+    if (this.fileToUpload !== null) {
+      objToSend.append('ProductImageURL', this.fileToUpload,this.fileToUpload.name);
     }
     objToSend.append('Price', formData.Price);
     objToSend.append('StockQuantity', formData.StockQuantity);
@@ -43,16 +45,15 @@ export class CreateProductComponent implements OnInit {
 
     this.http.post<any>(`${environment.apiUrl}api/Product/AddProduct`, objToSend)
       .subscribe(res =>{ 
-        if(res.success===true){
-      }
-        else{
-          alert(res.message);
-        }
+        
+          this.router.navigate(['/Product']);
+      
+          
+        
       },
       error=>{
         alert("error : "+error.Message);
       }
-      
       );
   }
   ngOnInit() {
@@ -67,4 +68,5 @@ export class CreateProductComponent implements OnInit {
       alert("errror");
     })
   }
+  
 }

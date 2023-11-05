@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategoryVM } from 'src/ModelVM/CategoryVM';
 import { environment } from 'src/environments/environment';
 
@@ -10,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CreateCategoryComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private router:Router) { }
   model: CategoryVM = new CategoryVM();
 
   ngOnInit() {
@@ -18,14 +19,14 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   onSubmit(formData2: any) {
-    alert(formData2.CategoryName);
+    
     const formData = new FormData();
     formData.append('CategoryName', formData2.CategoryName);
 
     this.http.post<any>(`${environment.apiUrl}api/Category/AddCategory`, formData)
       .subscribe(
         res => {
-          alert('Category added successfully');
+          this.router.navigate(['/Category']);
           console.log(res);
         },
         error => {

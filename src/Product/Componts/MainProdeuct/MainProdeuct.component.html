@@ -25,8 +25,8 @@
       <td>{{item.stockQuantity}}</td>
       <td>{{item.description}}</td>
 
-      <td><button type="button" class="btn btn-info">Edit</button></td>
-      <td><button type="button" class="btn btn-danger">Delete</button></td>
+      <td><button type="button" class="btn btn-info" (click)="Edit(item)">Edit</button></td>
+      <td><button type="button" class="btn btn-danger" (click)="Delete(item.productID)">Delete</button></td>
     </tr>
   </tbody>
 </table>

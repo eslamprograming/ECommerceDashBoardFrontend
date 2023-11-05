@@ -1,4 +1,3 @@
-<a type="button" href="" class="btn btn-primary">Add Order</a>
 <table class="table table-hover table-dark">
   <thead>
     <tr>
@@ -15,9 +14,9 @@
       <td>{{item.orderDate}}</td>
       <td>{{item.status}}</td>
       
-      
-      <td><button type="button" class="btn btn-info">Edit</button></td>
-      <td><button type="button" class="btn btn-danger">Delete</button></td>
+      <td><button type="button" class="btn btn-success" (click)="Details(item.orderID)">Details</button></td>
+      <td><button type="button" class="btn btn-info" (click)="Edit(item)">Edit</button></td>
+      <td><button type="button" class="btn btn-danger" (click)="Delete(item.orderID)">Delete</button></td>
     </tr>
   </tbody>
 </table>

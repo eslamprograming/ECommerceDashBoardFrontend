@@ -1,0 +1,19 @@
+<table class="table table-hover table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">image</th>
+      <th scope="col">Name</th>
+      <th scope="col">price</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr *ngFor="let item of model">
+      <th scope="row">1</th>
+      <td><img src={{item.productImageURL}} width="50px" height="50px"/></td>
+      <td>{{item.productName}}</td>
+      <td>{{item.price}}</td>
+    </tr>
+  </tbody>
+</table>

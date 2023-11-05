@@ -15,8 +15,8 @@
       <th scope="row">1</th>
       <td>{{item.categoryName}}</td>
       
-      <td><button type="button" class="btn btn-info">Edit</button></td>
-      <td><button type="button" class="btn btn-danger">Delete</button></td>
+      <td><button type="button" class="btn btn-info" (click)="EditCategory(item)">Edit</button></td>
+      <td><button type="button" class="btn btn-danger" (click)="DeleteCategory(item.categoryID)">Delete</button></td>
     </tr>
     
   </tbody>

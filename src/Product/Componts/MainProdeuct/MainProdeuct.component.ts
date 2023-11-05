@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ResponseVM } from 'src/ModelVM/ResponseVM';
 import { environment } from 'src/environments/environment';
 
@@ -13,7 +14,7 @@ export class MainProdeuctComponent implements OnInit {
   responseobj2:ResponseVM=new ResponseVM();
 
   CategoryID:number=0;
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private router:Router) { }
 
   ngOnInit() {
     this.AllCategory();
@@ -35,6 +36,26 @@ export class MainProdeuctComponent implements OnInit {
     error=>{
       alert("errror");
     })
+  }
+  Delete(Id:any){
+    var condel=confirm("Are You Sure To Delete");
+    if(condel===false){
+
+    }
+    else{
+    this.http.delete<any>(`${environment.apiUrl}/api/Product/DeleteProduct?ProductID=${Id}`).subscribe(
+      res=>{
+        location.reload();
+      },
+      error=>{
+        alert("error");
+      }
+    )
+    }
+  }
+  Edit(item:any){
+    localStorage.setItem("product",JSON.stringify(item));
+    this.router.navigate(['/EditProduct']);
   }
 
 }
