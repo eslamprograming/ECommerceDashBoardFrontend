@@ -43,7 +43,7 @@ export class MainProdeuctComponent implements OnInit {
 
     }
     else{
-    this.http.delete<any>(`${environment.apiUrl}/api/Product/DeleteProduct?ProductID=${Id}`).subscribe(
+    this.http.delete<any>(`${environment.apiUrl}api/Product/DeleteProduct?ProductID=${Id}`).subscribe(
       res=>{
         location.reload();
       },

@@ -20,19 +20,11 @@ export class CreateProductComponent implements OnInit {
   fileToUpload: File | null = null;
   onFileSelected(event: any) {
     this.fileToUpload = event.target.files[0];
-    alert(this.fileToUpload);
+    
   }
 
   onSubmit(formData: any) {
-    const objToSend = new FormData();
-    alert(formData.ProductName);
-    alert(formData.ProductImageURL);
-    alert(formData.Price);
-    alert(formData.StockQuantity);
-    alert(formData.Description);
-    alert(formData.CategoryID);
-
-
+    var objToSend = new FormData();
     objToSend.append('ProductName', formData.ProductName);
     if (this.fileToUpload !== null) {
       objToSend.append('ProductImageURL', this.fileToUpload,this.fileToUpload.name);
@@ -44,12 +36,8 @@ export class CreateProductComponent implements OnInit {
 
 
     this.http.post<any>(`${environment.apiUrl}api/Product/AddProduct`, objToSend)
-      .subscribe(res =>{ 
-        
+      .subscribe(res =>{
           this.router.navigate(['/Product']);
-      
-          
-        
       },
       error=>{
         alert("error : "+error.Message);
